@@ -6,9 +6,9 @@ import * as actions from '../../redux/actions/actions.js';
 const displayMessage = [];
 
 const mapStateToProps = (state) => ({
-  // username: state.textField.username,
+  username: state.names.username,
   // password: state.textField.password,
-  // fullName: state.textField.fullName,
+  fullName: state.names.fullName,
   validUser: state.textField.validUser,
   mode: state.responses.mode,
   signUpPost: state.responses.signUpPost,
@@ -22,6 +22,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(actions.createAccountSubmitActionCreator(e, mode, serverRes)), // remove server res argument when not needed
   changeToLoginPageActionCreator: () => dispatch(actions.changeToLoginPageActionCreator()),
   changeToProfilePageActionCreator: () => dispatch(actions.changeToProfilePageActionCreator()),
+  getUsernameActionCreator: (username) => dispatch(actions.getUsernameActionCreator(username)),
+  getFullNameActionCreator: (fullName) => dispatch(actions.getFullNameActionCreator(fullName)),
 });
 
 class SignUp extends Component {
@@ -39,6 +41,12 @@ class SignUp extends Component {
     e.preventDefault();
     // console.log(e, { mode }, { serverRes });
     let queryRes;
+
+    //------------------
+    this.props.getUsernameActionCreator(this.state.username);
+    this.props.getFullNameActionCreator(this.state.fullName);
+    //-------------------
+
 
     if (this.props.mode === 'dev') {
       // this.props.signUpPost.valid = false;
@@ -95,16 +103,17 @@ class SignUp extends Component {
               name="username"
               placeholder="enter username"
               value = {this.state.username}
-              onChange={(e) => {this.setState({ username: e.target.value })}}
+              onChange={(e) => {this.setState({ username: e.target.value });
+                                /*this.props.usernameChangeActionCreator}*/}}
             />
           </label>
           <label>
             Create a password:
             <input
-              type="text"
+              type="password"
               id="password"
               name="password"
-              placeholder="enter password"
+              // placeholder="enter password"
               value = {this.state.password}
               onChange={(e) => {this.setState({ password: e.target.value })}}
             />
@@ -117,7 +126,8 @@ class SignUp extends Component {
               name="full-name"
               placeholder="enter full name"
               value = {this.state.fullName}
-              onChange={(e) => {this.setState({ fullName: e.target.value })}}
+              onChange={(e) => {this.setState({ fullName: e.target.value });
+                                /* this.props.fullNameChangeActionCreator */}}
             />
           </label>
           <input type="submit" value='Create Account'/>

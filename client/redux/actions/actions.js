@@ -1,3 +1,4 @@
+import { user } from 'pg/lib/defaults';
 import * as types from '../constants/actionTypes.js';
 
 export const changePageActionCreator = pl => ({
@@ -73,6 +74,16 @@ export const updateCommunityMessagesActionCreator = pl => ({
 export const updateLocationActionCreator = pl => ({
   type: types.UPDATE_LOCATION,
   payload: pl,
+});
+
+export const getUsernameActionCreator = username => ({
+  type: types.GET_USERNAME,
+  payload: username,
+});
+
+export const getFullNameActionCreator = fullName => ({
+  type: types.GET_FULL_NAME,
+  payload: fullName,
 });
 
 // export default login;

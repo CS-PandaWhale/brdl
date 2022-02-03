@@ -4,7 +4,7 @@ import * as actions from '../../redux/actions/actions.js';
 import UserStats from '../components/userStats.jsx';
 
 const mapStateToProps = state => ({
-  username: state.textField.username,
+  username: state.names.username,
 });
 
 const mapDispatchTopProps = dispatch => ({
