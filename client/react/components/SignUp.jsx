@@ -51,7 +51,7 @@ class SignUp extends Component {
       const options = {
         method: 'POST',
         headers: { 'Access-Control-Allow-Origin': ' * ', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: this.props.username, password: this.props.password, fullName: this.props.fullName}),
+        body: JSON.stringify({ username: this.state.username, password: this.state.password, fullname: this.state.fullName}),
       };
       fetch(url, options)
         .then((res) => res.json())
