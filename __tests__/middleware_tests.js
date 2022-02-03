@@ -1,6 +1,7 @@
 const request = require('supertest');
 const assert = require('assert');
 const express = require('express');
+// const db = require('../server/models/brdlModels');
 
 // const app = express();
 const server = 'http://localhost:3000';
@@ -18,7 +19,8 @@ describe('route integration', () => {
     describe('POST', () => {
       it('responds with 200 status and application/json content type', () =>
         request(server)
-          .post('/gainAccess')
+          .post('/api/gainAccess')
+          .send({ username: 'ergo', password: 'ergo', fullname: 'Eric' })
           .expect('Content-Type', /application\/json/)
           .expect(200));
     });

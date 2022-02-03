@@ -11,7 +11,7 @@ const birdController = require('./controllers/birdController');
 
 app.use(express.json()); // replaces body-parser
 app.use(express.urlencoded({ extended: true })); // Helps parse different data types
-// app.use(cors());
+app.use(cors());
 
 // handle GET & POST requests to /gainAccess
 
@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true })); // Helps parse different data t
 // middleware will return a boolean.
 // if false, res.send('Login credentials are invalid')
 // else, direct user to the profile page
-app.get('/gainAccess', userController.auth, (req, res) => {
+app.post('/api/login', userController.auth, (req, res) => {
   res.status(200).json(res.locals.auth);
 });
 
