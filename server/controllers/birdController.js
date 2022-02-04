@@ -81,6 +81,10 @@ birdController.seen = async (req, res, next) => {
     const seenResult = await db.query(querySeen, [user_id, sciBirdName]);
     const timeSeen = seenResult.rows[0].time_stamp;
     res.locals.seen = { sciName: sciBirdName, timeStamp: timeSeen };
+
+    const queryCommon = `SELECT birds.common_name, birds.scientific_name FROM birds LEFT OUTER JOIN seen_birds ON birds.scientific_name = seen_birds.scientific_name`;
+    
+
     return next();
   } catch (err) {
     return next({
