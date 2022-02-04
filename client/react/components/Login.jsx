@@ -55,6 +55,7 @@ class Login extends Component {
       fetch(url, options)
         .then((res) => res.json())
         .then((data) => {
+          console.log(data);
           if (data.valid) this.props.changeToProfilePageActionCreator();
           else this.props.loginSubmitActionCreator();
         });
