@@ -56,6 +56,9 @@ class Login extends Component {
         .then((res) => res.json())
         .then((data) => {
           if (data.valid) this.props.changeToProfilePageActionCreator();
+          //data has valid, fullName, username, user_id
+          //data.user_id
+          //data.username
           else this.props.loginSubmitActionCreator();
         });
     }
