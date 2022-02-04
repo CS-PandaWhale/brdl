@@ -57,7 +57,6 @@ class Login extends Component {
         .then((res) => res.json())
         .then((data) => {
           if (data.valid) {
-            console.log(data.username);
             this.props.changeToProfilePageActionCreator();
             this.props.getUsernameActionCreator(data.username);
           } else this.props.loginSubmitActionCreator();
