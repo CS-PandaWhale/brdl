@@ -56,19 +56,9 @@ class Login extends Component {
       fetch(url, options)
         .then((res) => res.json())
         .then((data) => {
-<<<<<<< HEAD
-          if (data.valid) {
-            this.props.changeToProfilePageActionCreator();
-            this.props.getUsernameActionCreator(data.username);
-          } else this.props.loginSubmitActionCreator();
-          //data has valid, fullName, username, user_id
-          //data.user_id
-          //data.username
-=======
           console.log(data);
           if (data.valid) this.props.changeToProfilePageActionCreator();
           else this.props.loginSubmitActionCreator();
->>>>>>> dev
         });
     }
   }
