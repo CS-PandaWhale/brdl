@@ -16,7 +16,8 @@ birdController.nearby = async (req, res, next) => {
     lat = Number(lat);
     long = Number(long);
     const apiResponse = await axios.get(
-      `https://api.ebird.org/v2/data/obs/geo/recent?lat=${lat}&lng=${long}&maxResults=5`,
+      // `https://api.ebird.org/v2/data/obs/geo/recent?lat=${lat}&lng=${long}&maxResults=5`,
+      `https://api.ebird.org/v2/data/obs/US-CA/recent?&maxResults=10`,
       {
         headers: { 'X-eBirdApiToken': tokens.eBirdToken },
       }
@@ -65,19 +66,19 @@ birdController.nearby = async (req, res, next) => {
 // querey database to insert bird into the database
 birdController.seen = async (req, res, next) => {
   try {
-    const { username, sciBirdName } = req.query;
+    const { user_id, sciBirdName } = req.query;
     sciBirdName.split('_').join(' ');
     // check if the bird exists in birds table, if it doesn't insert into birds table
-    const queryString = 'SELECT * FROM Birds WHERE scientific_name=$1';
+    const queryString = `SELECT * FROM birds WHERE scientific_name = $1`;
     const queryResult = await db.query(queryString, [sciBirdName]);
     if (!queryResult.rows.length) {
-      const queryInsert = `INSERT INTO Birds (scientific_name, common_name) VALUES ($1, 'unknown')`;
+      const queryInsert = `INSERT INTO birds (scientific_name, common_name) VALUES ($1, 'unknown')`;
       await db.query(queryInsert, [sciBirdName]);
       console.log('BIRD ADDED TO TABLE');
     }
     // insert into the seen_bird table username, bird see, and time seen
-    const querySeen = `INSERT INTO seen_birds (username, scientific_name, time_stamp) VALUES ($1, $2, CURRENT_TIMESTAMP) RETURNING time_stamp`;
-    const seenResult = await db.query(querySeen, [username, sciBirdName]);
+    const querySeen = `INSERT INTO seen_birds (user_id, scientific_name, time_stamp) VALUES ($1, $2, CURRENT_TIMESTAMP) RETURNING time_stamp`;
+    const seenResult = await db.query(querySeen, [user_id, sciBirdName]);
     const timeSeen = seenResult.rows[0].time_stamp;
     res.locals.seen = { sciName: sciBirdName, timeStamp: timeSeen };
     return next();
