@@ -5,6 +5,7 @@ import textFieldReducer from './textFieldReducer';
 import responsesReducer from './responsesReducer';
 import messagesReducer from './messagesReducer';
 import birdsReducer from './birdsReducer';
+import namesReducer from './namesReducer';
 
 const reducers = combineReducers({
   navigation: navigationReducer,
@@ -12,6 +13,7 @@ const reducers = combineReducers({
   responses: responsesReducer,
   messages: messagesReducer,
   birds: birdsReducer,
+  names: namesReducer,
 });
 
 export default reducers;
