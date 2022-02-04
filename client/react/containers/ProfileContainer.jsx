@@ -4,7 +4,8 @@ import * as actions from '../../redux/actions/actions.js';
 import UserStats from '../components/userStats.jsx';
 
 const mapStateToProps = state => ({
-  username: state.textField.username,
+  // username: state.textField.username,
+  username: state.names.username
 });
 
 const mapDispatchTopProps = dispatch => ({
@@ -18,6 +19,7 @@ class ProfileContainer extends Component {
   }
 
   render() {
+    console.log(this.props.username);
     return (
       <div className="component-container">
         {/* <button key='cB' onClick={() => this.props.changePageActionCreator('community')}>Community</button> */}

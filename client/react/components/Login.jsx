@@ -22,6 +22,7 @@ const mapDispatchToProps = (dispatch) => ({
   passwordChangeActionCreator: () => dispatch(actions.passwordChangeActionCreator(event)),
   loginSubmitActionCreator: (e, mode, serverRes) =>
     dispatch(actions.loginSubmitActionCreator(e, mode, serverRes)),
+  getUsernameActionCreator: (username) => dispatch(actions.getUsernameActionCreator(username)),
 });
 
 class Login extends Component {
@@ -55,9 +56,19 @@ class Login extends Component {
       fetch(url, options)
         .then((res) => res.json())
         .then((data) => {
+<<<<<<< HEAD
+          if (data.valid) {
+            this.props.changeToProfilePageActionCreator();
+            this.props.getUsernameActionCreator(data.username);
+          } else this.props.loginSubmitActionCreator();
+          //data has valid, fullName, username, user_id
+          //data.user_id
+          //data.username
+=======
           console.log(data);
           if (data.valid) this.props.changeToProfilePageActionCreator();
           else this.props.loginSubmitActionCreator();
+>>>>>>> dev
         });
     }
   }
@@ -103,7 +114,6 @@ class Login extends Component {
           ) : (
             <p className="hidden" />
           )}
-          ;
         </form>
 
         {/* <form key="li-form" action="" onSubmit={e => this.handleAccountSubmit(e)}>
