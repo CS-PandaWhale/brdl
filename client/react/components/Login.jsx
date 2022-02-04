@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch) => ({
   passwordChangeActionCreator: () => dispatch(actions.passwordChangeActionCreator(event)),
   loginSubmitActionCreator: (e, mode, serverRes) =>
     dispatch(actions.loginSubmitActionCreator(e, mode, serverRes)),
-  getUsernameActionCreator: (usernam) => dispatch(actions.getUsernameActionCreator(username)),
+  getUsernameActionCreator: (username) => dispatch(actions.getUsernameActionCreator(username)),
 });
 
 class Login extends Component {
@@ -57,8 +57,9 @@ class Login extends Component {
         .then((res) => res.json())
         .then((data) => {
           if (data.valid) {
+            console.log(data.username);
             this.props.changeToProfilePageActionCreator();
-            this.props.getUsernameActionCreator(username);
+            this.props.getUsernameActionCreator(data.username);
           } else this.props.loginSubmitActionCreator();
           //data has valid, fullName, username, user_id
           //data.user_id
